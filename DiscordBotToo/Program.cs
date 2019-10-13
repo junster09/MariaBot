@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DiscordBotToo.Storage;
+using System;
+
 
 namespace DiscordBotToo
 {
@@ -6,7 +8,12 @@ namespace DiscordBotToo
     {
         private static void Main()
         {
+            Unity.RegisterTypes();
+
+
             Console.WriteLine("I'm following a tutorial eccks dee");
         }
+
     }
+
 }
