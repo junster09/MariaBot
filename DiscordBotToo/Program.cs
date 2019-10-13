@@ -6,7 +6,7 @@ namespace DiscordBotToo
     {
         private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("I'm following a tutorial eccks dee");
         }
     }
 }
