@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Unity;
 using Unity.Resolution;
+using Unity.Lifetime;
 
 namespace DiscordBotToo
 {
@@ -26,14 +27,15 @@ namespace DiscordBotToo
         public static void RegisterTypes() {
 
             _container = new UnityContainer();
-            _container.RegisterType<IDataStorage, InMemoryStorage>();
+            _container.RegisterType<IDataStorage, InMemoryStorage>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<Discord.Connection>(new ContainerControlledLifetimeManager());
         }
 
 
         internal static T Resolve<T>() {
             return _container.Resolve<T>();
         }
-        
         //^ Unity apperently has its own resolution, this doesn't seem to work anymore https://unitycontainer.github.io/api/Unity.Resolution.IResolve.html
     }
 }
