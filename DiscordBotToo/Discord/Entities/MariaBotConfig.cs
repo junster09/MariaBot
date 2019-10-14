@@ -10,6 +10,7 @@ namespace DiscordBotToo.Discord.Entities
     public class MariaBotConfig
     {
         public string Token { get; set; }
+        public string cmdPrefix { get; set; }
 
     }
 }
