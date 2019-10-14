@@ -11,7 +11,5 @@ namespace DiscordBotToo.Discord.Entities
     {
         public string Token { get; set; }
 
-        public DiscordSocketConfig socketConfig;
-
     }
 }

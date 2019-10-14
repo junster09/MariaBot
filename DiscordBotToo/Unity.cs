@@ -4,8 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Unity;
+using Unity.Injection;
 using Unity.Resolution;
 using Unity.Lifetime;
+using Discord.WebSocket;
+using DiscordBotToo.Discord;
 
 namespace DiscordBotToo
 {
@@ -27,9 +30,14 @@ namespace DiscordBotToo
         public static void RegisterTypes() {
 
             _container = new UnityContainer();
-            _container.RegisterType<IDataStorage, InMemoryStorage>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<ILogger, Logger>(new ContainerControlledLifetimeManager());
-            _container.RegisterType<Discord.Connection>(new ContainerControlledLifetimeManager());
+
+            _container.RegisterSingleton<IDataStorage, JsonStorage>();
+            _container.RegisterSingleton<ILogger, Logger>();
+            _container.RegisterType<DiscordSocketConfig>(new InjectionFactory(i => DiscordStealer.GetDefault()));
+            //_container.RegisterType<DiscordSocketConfig>(IUnityContainer.RegisterFactory(i => DiscordStealer.GetDefault()));
+            _container.RegisterSingleton<DiscordSocketClient>(new InjectionConstructor(typeof(DiscordSocketConfig)));
+            _container.RegisterSingleton<Discord.Connection>();
+
         }
 
 

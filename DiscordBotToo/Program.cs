@@ -15,15 +15,12 @@ namespace DiscordBotToo
             Unity.RegisterTypes();
             Console.WriteLine("I'm following a tutorial eccks dee");
 
-            var discordBotConfig = new MariaBotConfig
-            {
-                Token = "aewubfgasuebf",
-                socketConfig = DiscordStealer.GetDefault()
-
-            };
-
+            var storage = Unity.Resolve<IDataStorage>();
             var connection = Unity.Resolve<Connection>();
 
+            await connection.ConnectAsync(new MariaBotConfig {
+                Token = storage.RestoreObject<string>("Config/BotToken")
+            });
             
 
         }
